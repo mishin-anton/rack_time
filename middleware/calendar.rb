@@ -62,25 +62,18 @@ class Calendar
 
   def data_convertor(params)
     current_time = Time.new
-    year = ''
-    month = ''
-    day = ''
-    hour = ''
-    minute = ''
-    second = ''
-    undefined = 0
-    undefined_array = []
+    @dates = {}
 
     params.map! do |value|
       case value
       when 'year'
-        value = current_time.year
+        @dates << current_time.year
       when 'month'
-        value = current_time.month
+        @dates = current_time.month
       when 'day'
-        value = current_time.day
+        @dates = current_time.day
       when 'hour'
-        value = current_time.hour
+        @dates = current_time.hour
       when 'minute'
         value = current_time.min
       when 'second'
@@ -88,7 +81,8 @@ class Calendar
       end
     end
 
-    params.join("-")
+    # params.join("-")
+    # @dates.strftime("%Y").to_i
   end
 
   def split_params (params)
