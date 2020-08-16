@@ -41,9 +41,6 @@ class TimeFormatter
 
     @dates = @dates.split('').join("-")
     Time.now.strftime(@dates)
-    # body = @current_format.reduce('') { |body_box, param| body_box << @dates[param] }
-    # body = body.split('').join('-')
-    # current_format.join("-")
 
   end
 
