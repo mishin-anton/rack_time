@@ -24,17 +24,19 @@ class App
     time_formatter = TimeFormatter.new(current_format)
 
     if time_formatter.accepted_format?
-      answer(200, time_formatter.get_data)
+      answer(200, time_formatter.time_result)
     elsif
-      answer(400, time_formatter.unknow_params)
+      "Unknow params"
+      answer(400, "Unknow params #{time_formatter.unknow_params}")
     end
   end
 
   def answer (status, body)
-    @response = Rack::Response.new
-    @response.status = status
-    @response.write(body)
-    @response.finish
+    response = Rack::Response.new
+    response.status = status
+    response.write(body.to_s)
+    response.add_header('Content-Type', 'text/plain')
+    response.finish
   end
 
 end

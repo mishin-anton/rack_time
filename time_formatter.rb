@@ -7,16 +7,19 @@ class TimeFormatter
     @current_format = current_format
   end
 
+  def call
+    @difference = @current_format - SUPPORTED_FORMATS.keys
+  end
+
   def accepted_format?
-    accepted_format = @current_format - SUPPORTED_FORMATS.keys
-    accepted_format.empty?
+    call.empty?
   end
 
   def unknow_params
-    @current_format - SUPPORTED_FORMATS
+    @difference
   end
 
-  def get_data
+  def time_result
     data = @current_format.reduce('') { |body_box, param| body_box << SUPPORTED_FORMATS[param] }
     data = data.split('').join('-')
     Time.now.strftime(data)
